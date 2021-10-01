@@ -1,7 +1,32 @@
-<!doctype html>
-<title>Hello from Flask</title>
-{% if name %}
-<h1>Hello {{ name }}!</h1>
-{% else %}
-<h1>Hello, World!</h1>
-{% endif %}
+{% extends "layout/default.html" %}
+
+{% block title %}Hello{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+<form method="POST" action = "/watermark" enctype = "multipart/form-data">
+
+
+  <label for="photos">
+    Upload photos:
+  </label>
+  <input required type="file" id="photos" name="photos" accept="image/png, image/jpeg, image/jpg" multiple>
+  
+  <label for="watermark">
+    Upload watermark:
+  </label>
+  <input required type="file" id="watermark" name="watermark" accept="image/png, image/jpeg, image/jpg">
+  
+  <label for="position">Choose watermark position:</label>
+  <select required name="position" id="position">
+    <option value="top-left">Top Left</option>
+    <option value="top-right">Top Right</option>
+    <option value="bottom-left">Bottom Left</option>
+    <option value="bottom-right">Bottom Right</option>
+  </select> 
+  
+  <input type="submit" />
+</form>
+{% endblock %}
