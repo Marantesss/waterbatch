@@ -41,9 +41,13 @@ def get_paste_coordinates(background_size: tuple[int, int], foreground_size: tup
 
   return size_dictionary.get(placement.lower())
 
-def main():
-  water_mark = get_water_mark_image('samples/web-summit.png', 128)
-  modified_image = print_image('samples/dog.jpg', water_mark, 'bottom-right')
-  modified_image.save('samples/output/%s' % ('dog.jpg'), "JPEG")
+def watermark(folder_path: str, image_paths: list[str], water_mark_path: str, position: str, output_folder_path: str) -> bool:
+  water_mark = get_water_mark_image(water_mark_path, 128)
 
-main()
+  for image_path in image_paths:
+    full_path = '%s/%s' % (folder_path, image_path)
+    print(full_path)
+    image = print_image(full_path, water_mark, position)
+    image.save('%s/%s' % (output_folder_path, image_path))
+
+  return True
